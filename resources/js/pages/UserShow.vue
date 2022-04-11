@@ -1,0 +1,3 @@
+<template>
+  ユーザーです！
+</template>

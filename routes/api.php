@@ -23,6 +23,10 @@ Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name
 Route::get('/user', function() {
   return Auth::user();
 })->name('user');
+// 写真詳細
+// Route::get('/user/{id}', 'App\Http\Controllers\UserController@show')->name('user.show');
+
+
 // 写真一覧
 Route::get('/photos', 'App\Http\Controllers\PhotoController@index')->name('photo.index');
 // 写真詳細
