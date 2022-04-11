@@ -42,7 +42,7 @@ export default {
       // axiosとは非同期通信でデータを取得するためのモジュールです。Node.jsで書かれています。読み方はアクシオスです。
       // axiosはvueでgetやpostを行うときに使う
       // axiosはPromiseベースのHTTP ClientライブラリでGETやPOSTのHTTPリクエストを使ってサーバからデータの取得、データへのデータ送信を行うことができます。
-      const response = await axios.get(`/api/photos/?page=${this.page}`)
+      const response = await axios.get(`/api/photos?page=${this.page}`)
 
       if (response.status !== OK) {
         this.$store.commit('error/setCode', response.status)
