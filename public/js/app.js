@@ -2890,6 +2890,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -3008,6 +3015,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.like();
       }
     },
+    onDeleteClick: function onDeleteClick() {
+      if (!this.isLogin) {
+        alert('削除機能を使うにはログインしてください。');
+        return false;
+      }
+
+      this["delete"]();
+    },
     like: function like() {
       var _this3 = this;
 
@@ -3079,27 +3094,59 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee4);
       }))();
+    },
+    "delete": function _delete() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return axios["delete"]("/api/photos/".concat(_this5.id, "/delete"));
+
+              case 2:
+                response = _context5.sent;
+
+                if (!(response.status !== _util__WEBPACK_IMPORTED_MODULE_1__.OK)) {
+                  _context5.next = 6;
+                  break;
+                }
+
+                _this5.$store.commit('error/setCode', response.status);
+
+                return _context5.abrupt("return", false);
+
+              case 6:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
     }
   },
   watch: {
     $route: {
       handler: function handler() {
-        var _this5 = this;
+        var _this6 = this;
 
-        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
             while (1) {
-              switch (_context5.prev = _context5.next) {
+              switch (_context6.prev = _context6.next) {
                 case 0:
-                  _context5.next = 2;
-                  return _this5.fetchPhoto();
+                  _context6.next = 2;
+                  return _this6.fetchPhoto();
 
                 case 2:
                 case "end":
-                  return _context5.stop();
+                  return _context6.stop();
               }
             }
-          }, _callee5);
+          }, _callee6);
         }))();
       },
       immediate: true
@@ -6619,6 +6666,16 @@ var render = function () {
                 _c("i", { staticClass: "icon ion-md-arrow-round-down" }),
                 _vm._v("Download\n    "),
               ]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "button button--delete",
+                attrs: { title: "Delete photo" },
+                on: { click: _vm.onDeleteClick },
+              },
+              [_c("i", { staticClass: "icon ion-md-trash" })]
             ),
             _vm._v(" "),
             _vm._m(0),

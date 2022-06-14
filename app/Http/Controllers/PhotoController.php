@@ -163,4 +163,25 @@ class PhotoController extends Controller
 
         return ["photo_id" => $id];
     }
+
+    /**
+     * 投稿削除
+     * @param string $id
+     * @return array
+     */
+    public function delete(string $id)
+    {
+        $photo = Photo::where('id', $id)->first();
+
+        if (! $photo) {
+            abort(404);
+        }
+
+        if ($photo->like) {
+            $photo->like->delete();
+        }
+        $photo->delete();
+
+        return ["photo_id" => $id];
+    }
 }

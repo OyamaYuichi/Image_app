@@ -26,6 +26,13 @@
       >
         <i class="icon ion-md-arrow-round-down"></i>Download
       </a>
+      <button
+        class="button button--delete"
+        title="Delete photo"
+        @click="onDeleteClick"
+      >
+        <i class="icon ion-md-trash"></i>
+      </button>
       <h2 class="photo-detail__title">
         <i class="icon ion-md-chatboxes"></i>Comments
       </h2>
@@ -132,6 +139,15 @@ export default {
       }
     },
 
+    onDeleteClick () {
+      if (! this.isLogin) {
+        alert('削除機能を使うにはログインしてください。')
+        return false
+      }
+
+      this.delete()
+    },
+
     async like () {
       const response = await axios.put(`/api/photos/${this.id}/like`)
 
@@ -154,6 +170,15 @@ export default {
 
       this.photo.likes_count = this.photo.likes_count - 1
       this.photo.liked_by_user = false
+    },
+
+    async delete () {
+      const response = await axios.delete(`/api/photos/${this.id}/delete`)
+
+      if (response.status !== OK) {
+        this.$store.commit('error/setCode', response.status)
+        return false
+      }
     }
   },
   watch: {

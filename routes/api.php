@@ -39,6 +39,7 @@ Route::post('/photos/{photo}/comments', 'App\Http\Controllers\PhotoController@ad
 Route::put('/photos/{id}/like', 'App\Http\Controllers\PhotoController@like')->name('photo.like');
 // いいね解除
 Route::delete('/photos/{id}/like', 'App\Http\Controllers\PhotoController@unlike');
+Route::delete('/photos/{id}/delete', 'App\Http\Controllers\PhotoController@delete');
 // トークンリフレッシュ
 Route::get('/reflesh-token', function (Illuminate\Http\Request $request) {
   $request->session()->regenerateToken();
